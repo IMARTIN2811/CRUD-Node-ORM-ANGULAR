@@ -1,0 +1,25 @@
+    <strong>
+        <p mat-dialog-title align="center">Confirmacion!</p>
+    </strong>
+    <mat-card class="border border-danger">
+        <div mat-dialog-content align="center">
+            <p>{{mensaje}}</p>
+        </div>
+        <div align="center">
+            <img src="assets/gif/2.jpg" alt="" width="100px" height="100px">
+        </div>
+        <div mat-dialog-actions class="justify-content-center">
+            <button mat-button (click)="cerrarDialog()" class="btn btn-primary mr-2">
+                <i class="fas fa-times-circle"></i>
+                No
+            </button>
+            <button mat-button (click)="confirma()" cdkFocusInitial class="btn btn-primary mr2">
+                <i class="fas fa-check-circle"></i>
+                Si
+            </button>
+        </div>    
+    </mat-card>
+    
+    
+
+        

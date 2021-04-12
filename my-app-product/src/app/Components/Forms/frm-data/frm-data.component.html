@@ -1,0 +1,40 @@
+<p>frm-data works!</p>
+<div class="list row">
+    <div class="col-md-6">
+      <h4>Lista de productos</h4>
+      <ul class="list-group" data-toggle="tooltip" title="Seleccione un producto" >
+        <li class="list-group-item list-group-item-warning" *ngFor="let product of products; let i = index"
+          [class.active]="i == currentIndex" (click)="setActiveProduct(product, i)">
+          {{ product.name }}
+        </li> 
+      </ul>
+        <button class="m-3 btn btn-sm btn-danger" (click)="mostrarDialog()" 
+          title="Eliminar todos los productos"> 
+          <i class="fas fa-trash-alt"></i>
+          Eliminar todos
+        </button>
+    </div>
+    <div class="col-md-6">
+      <div *ngIf="currentProduct" class="edit-form">
+        <h4>Productos</h4>
+        <ul class="list-group" title="Detalle del producto" >
+          <li class="list-group-item list-group-item-warning" >
+            <div>
+              <strong>Name:</strong>
+              {{ currentProduct.name }}
+            </div>
+            <div>
+              <strong>Price:</strong>
+              {{ currentProduct.price }}
+            </div> 
+            <div>
+              <a class="btn btn-warning" routerLink="/update/{{ currentProduct.id }}" title="Editar producto">
+                <i class="fas fa-edit"></i>
+                Editar
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+</div>

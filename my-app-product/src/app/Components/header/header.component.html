@@ -1,0 +1,30 @@
+<div class="bg-dark ">
+
+</div>
+<!--Cuerpo del header-->
+<script src="https://kit.fontawesome.com/dad491e683.js" crossorigin="anonymous"></script>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" 
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item; navbar-brand " routerLinkActive="active">
+              <a class="nav-link" [routerLink]="['/']">INICIO<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item; navbar-brand" routerLinkActive="active">
+              <a class="nav-link"  [routerLink]="['/data']">VER</a>
+          </li>
+          <li class="nav-item; navbar-brand" routerLinkActive="active">
+              <a class="nav-link"  [routerLink]="['/producto']">DAR DE ALTA</a>
+          </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+  </div>
+
+</nav>
