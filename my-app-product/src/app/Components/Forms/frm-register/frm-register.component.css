@@ -1,0 +1,33 @@
+.regiter-form {
+    padding: 4rem 1rem;
+  
+  }
+
+mat-card {
+    max-width: 320px;
+    max-height: 360px;
+    margin: auto;
+    text-align: center;
+    box-sizing: content-box;
+    margin-top: 50px;
+    /*
+    margin: 2rem auto;
+    margin-top: 50px;
+    height: 350px;
+    */
+  }
+
+ 
+.full-width-input
+    {
+    width: 100%;
+  }
+
+  button{
+    width: 50%;  
+  }
+
+  .separator {
+    margin-bottom: 10px;
+    /*2rem;*/
+  }

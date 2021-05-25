@@ -1,1 +1,61 @@
-<p>frm-register works!</p>
+<div class="register-form">
+    <mat-card class="border">
+        <mat-card-content>
+            <h1>REGISTER</h1>
+            <form *ngIf="!MsgSuccessful" name="form" (ngSubmit)="f.form.valid && saveUsers()" 
+                #f="ngForm" novalidate>
+                    <mat-form-field class="full-width-input">
+                        <input type="text" matInput placeholder="Username" name="username" 
+                            [(ngModel)]="form.username" required minlength="3" maxlength="20" #username="ngModel">
+                            <span class="material-icons" matSuffix>person</span>
+                            <div class="alert-danger" *ngIf="f.submitted && username.invalid">
+                                <div *ngIf="username.errors.required">El usuario es requerido</div>
+                                <div *ngIf="username.errors.minlength">El nombre de usuario debe tener al menos 3 caracteres</div>
+                                <div *ngIf="username.errors.maxlength">El nombre de usuario debe tener como máximo 20 caracteres</div>
+                            </div>
+                    </mat-form-field>
+                    <mat-form-field class="full-width-input">
+                        <!--
+                        <div style="text-align: right;">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        -->
+                        <input type="email" matInput placeholder="Email" name="email" 
+                            [(ngModel)]="form.email" required email #email="ngModel">
+                            <span class="material-icons" matSuffix>email</span>
+                            <div class="alert-danger" *ngIf="f.submitted && email.invalid">
+                                <div *ngIf="email.errors.required">Email requerido</div>
+                                <div *ngIf="email.errors.email">El email debe ser válido</div>
+                            </div>
+                    </mat-form-field>
+                    <mat-form-field class="full-width-input separator">
+                        <!--
+                        <div style="text-align: right;">
+                            <i class="fas fa-unlock-alt"></i>
+                        </div>
+                        -->
+                        <input type="password" matInput placeholder="Password" name="password" 
+                        [type]="hide ? 'password':'text'" [(ngModel)]="form.password" required minlength="6" #password="ngModel">
+                            <span class="material-icons" matSuffix (click)="hide = !hide">
+                                {{ hide ? 'visibility':'visibility_off'}}
+                            </span>
+                            <div class="alert-danger" *ngIf="f.submitted && password.invalid">
+                                <div *ngIf="password.errors.required">El password es requerido</div>
+                                <div *ngIf="password.errors.minlength">El password debe tener al menos 6 caracteres</div>
+                            </div>
+                    </mat-form-field>
+                    <button mat-raised-button class="btn-block" color="primary">Registrarse</button>
+                    <div style="margin: 10px;"> 
+                        <div class="alert alert-success" *ngIf="MsgSuccessful">
+                            Se ha registrado corrrectamente
+                        </div>
+                    </div>
+                    <div style="margin: 10px;">
+                        <div class="alert alert-warning" *ngIf="f.submitted && MsgSignupFailed">
+                            {{ ErrorMsg }}
+                        </div>
+                    </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
