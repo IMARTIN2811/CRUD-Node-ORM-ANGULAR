@@ -1,6 +1,7 @@
 //se hacen ñas importaciones 
-const { AuthJwt } = require('../middleware');
-const controller =  require('../controllers/user.controller');
+const { AuthJwt } = require("../middleware");
+const controller =  require("../controllers/user.controller");
+const ctrlrProduct = require("../controllers/user.controller");
 //
 
 //se crea la funcion y se exporta
@@ -8,8 +9,9 @@ module.exports = function (app) {
     //se configura el encabezado de respuesta http
     app.use(function(req, res, next) {
         res.header("Access-Control-Allow-Headers",
-                   "x-access-token", "Origin", 
-                   "Content-Type: application/json", "Accept"
+                   //"x-access-token, Origin, Content-Type: application/json, Accept" 
+                   "x-access-token, Origin, Content-Type, Accept"
+                   
                 );
             next();
     });
@@ -25,5 +27,7 @@ module.exports = function (app) {
 
     //configura la ruta que solo da acceso al administradpr
     app.get("/api/test/admin",[AuthJwt.verifyToken,AuthJwt.RolAdmin], controller.Admin);
+
+    //app.get("/api/prod/producto", [AuthJwt.verifyToken, AuthJwt.RolAdmin], controller.Admin);
 };
 

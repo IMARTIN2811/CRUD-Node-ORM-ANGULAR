@@ -1,15 +1,15 @@
 //Se hacen las impprtaciones
-const { verificaSignup } = require('../middleware');
-const Controller = require('../controllers/authent.controller');
+const { verificaSignup } = require("../middleware");
+const controller = require("../controllers/authent.controller");
 //
 
 //se crea la funcion y se exporta
 module.exports =  function(app){
     //se define la ruta y la configuracion del acceso cors
     app.use(function(req,res, next) {
-        res.setHeader("Access-Control-Allow-Headers",
-                      "x-access-token", "Origin", 
-                      "Content-Type: application/json", "Accept"
+        res.header("Access-Control-Allow-Headers",
+                    //  "x-access-token, Origin, Content-Type: application/json, Accept"
+                    "x-access-token, Origin, Content-Type, Accept"
                 );
         next();
     });
@@ -18,9 +18,9 @@ module.exports =  function(app){
     app.post("/api/auth/register", 
         [verificaSignup.checkDuplicateUserEmail,
          verificaSignup.checkRoleExisted], 
-        Controller.register
+        controller.register
     );
 
     //Ruta para el login
-    app.post("/api/auth/login", Controller.login);
+    app.post("/api/auth/login", controller.login);
 };

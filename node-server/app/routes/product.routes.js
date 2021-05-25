@@ -1,7 +1,9 @@
 module.exports = app => {
     const products = require("../controllers/product.controller.js");
     var router = require("express").Router();
-
+    const { verificaSignup } = require("../middleware");
+    const controller = require("../controllers/user.controller");
+    
     //crea un nuevo producto
     router.post("/", products.create);
     //Recupera todos los productos
