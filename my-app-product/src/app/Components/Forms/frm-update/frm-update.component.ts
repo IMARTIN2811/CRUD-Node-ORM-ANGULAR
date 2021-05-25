@@ -5,7 +5,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FrmCheckComponent } from 'src/app/Components/Msg/frm-check/frm-check.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FrmOkComponent } from '../../Msg/frm-ok/frm-ok.component';
+import { TokenStorageService  } from '../../../services/token-storage.service';
+import { UsersService } from '../../../services/users.service';
 //
+
 @Component({
   selector: 'app-frm-update',
   templateUrl: './frm-update.component.html',
@@ -15,16 +18,30 @@ export class FrmUpdateComponent implements OnInit {
 
   currentProducts = null;
   message = '';
+  content: string;
+  rol: any;
 
   constructor( 
     private productService: ServiceService,
     private route: ActivatedRoute,
     private router: Router,
-    public dialog: MatDialog ) { }
+    public dialog: MatDialog,
+    private token: TokenStorageService,
+    private usersService: UsersService ) { }
 
   ngOnInit(): void {
+    this.rol = this.token.getUser();
     this.message = '';
     this.getProducts(this.route.snapshot.paramMap.get('id'));
+    
+    this.usersService.getAdmin().subscribe(
+      data =>{
+        this.content = data;
+      },
+      err =>{
+        this.content = JSON.parse(err.error).message;
+      }
+    );
   }
 
   getProducts(id): void {
