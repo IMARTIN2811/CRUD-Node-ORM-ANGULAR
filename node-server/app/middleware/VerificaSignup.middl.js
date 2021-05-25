@@ -1,7 +1,7 @@
 //importa los archivos
-const db = require('../models');
+const db = require("../models");
 const ROLES = db.ROLES;
-const User = db.users
+const User = db.user;
 //
 
 //varifica si el usuario  y el eamil ya existe
@@ -14,7 +14,7 @@ checkDuplicateUserEmail = (req,res, next) =>{
     }).then(user => {
         if (user) {
             res.status(400).send({
-                message: '¡Error!, El ya se encuentra en uso'
+                message: 'El usuario ya se encuentra en uso'
             });
             return;
         }
