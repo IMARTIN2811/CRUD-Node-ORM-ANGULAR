@@ -1,60 +1,69 @@
-<!--
-<div class="bg-dark ">
 
-</div>
-
-<script src="https://kit.fontawesome.com/dad491e683.js" crossorigin="anonymous"></script>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-    <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" 
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item; navbar-brand " routerLinkActive="active">
-                    <a class="nav-link" [routerLink]="['/']">INICIO<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item; navbar-brand" routerLinkActive="active">
-                    <a class="nav-link"  [routerLink]="['/data']">VER</a>
-                </li>
-                <li class="nav-item; navbar-brand" routerLinkActive="active">
-                    <a class="nav-link"  [routerLink]="['/producto']">DAR DE ALTA</a>
-                </li>
-            </ul>
-            
-            <div class="navbar-nav ml-auto">      
-                <li class="nav-item; navbar-brand" routerLinkActive="active">
-                    <a mat-button [routerLink]="">LOGIN</a>
-                </li>    
-                <li class="nav-item; navbar-brand" routerLinkActive="active">
-                    <a mat-button [routerLink]="">ADMIN</a>
-                </li>
-                <li class="nav-item; navbar-brand" routerLinkActive="active">
-                    <a mat-button [routerLink]="">CERRAR SESION</a>
-                </li>              
+    <div id="app">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                  <div class="d-flex justify-content-start">
+                    <a mat-button [routerLink]="['/home']">
+                        <i class="fas fa-home"></i>
+                        HOME</a>
+                  </div>
+                  <div class="d-flex justify-content-start" *ngIf="showFrmAdmin">
+                    <a class="nav-item" mat-button [routerLink]="['/admin']">
+                        <i class="fas fa-user-tie"></i>
+                        ADMIN</a>
+                  </div>
+                  <div class="d-flex justify-content-start" *ngIf="showFrmAdmin">
+                      <div class="dropdown">
+                        <a class="dropdown-toggle" mat-button id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-cart-plus"></i>
+                            PRODUCTOS
+                        </a>
+                        <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton" *ngIf="showFrmAdmin">
+                            <a class="dropdown-item" [routerLink]="['/data']" >VER</a>
+                            <a class="dropdown-item" [routerLink]="['/producto']" >DAR DE ALTA</a>
+                        </div>   
+                      </div>    
+                  </div>
+                  <div class="d-flex justify-content-start" *ngIf="showFrmEmp">
+                    <a class="nav-item" mat-button [routerLink]="['/emp']">
+                        <i class="fas fa-user-friends"></i>
+                        EMPLEADOS</a>
+                  </div>
+                  <div class="d-flex justify-content-start" *ngIf="isLoggin">
+                    <a class="nav-item" mat-button [routerLink]="['/user']">
+                        <i class="fas fa-users"></i>
+                        USUARIO</a>
+                  </div>
+              </div>
+              <div class="navbar-nav ml-auto" *ngIf="!isLoggin">
+                <div class="d-flex justify-content-start">
+                    <a class="nav-item" mat-button [routerLink]="['/register']">
+                        <i class="fas fa-user-plus"></i>
+                        REGISTRARSE</a>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <a class="nav-item" mat-button [routerLink]="['/login']">
+                        <i class="fas fa-sign-in-alt"></i>
+                        LOGIN</a>
+                </div>
+              </div>
+              <div class="navbar-nav ml-auto" *ngIf="isLoggin">
+                <div class="d-flex justify-content-start">
+                    <a class="nav-item" mat-button [routerLink]="['/profile']">
+                        <i class="fas fa-user-circle"></i>
+                        {{ username }}</a>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <a mat-button (click)="logout()">
+                        <i class="fas fa-power-off"></i>
+                        CERRAR SESION</a>
+                </div>
+              </div>
             </div>
-
-        </div>
+        </nav>
     </div>
-</nav>
--->
-{{ varAdmin }} - Rol
-<mat-toolbar class="bg-dark">
-    <ng-container *ngIf="!varAdmin; else viewAdmin">
-        <span>My app</span>
-        <span class="spacer"></span>
-        <div>
-            <a mat-button [routerLink]="['/login']">LOGIN</a>
-            <a mat-button [routerLink]="['/admin']">ADMIN</a>
-            <a mat-button [routerLink]="">CERRAR SESION</a>
-        </div>
-    </ng-container>
-    <button (click)="varAdmin = !varAdmin">Cambiar</button>
-</mat-toolbar>
-    <ng-template #viewAdmin>
-        <button mat-icon-button (click)="onToggleSidenav()">
-            <mat-icon>menu</mat-icon>
-        </button>
-        <span class="spacer"></span>
-    </ng-template>

@@ -1,6 +1,11 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-//EventEmitter permite crear eventos personalizados
-//
+/*Se hacen las importaciones */
+import { TokenStorageService } from '../../services/token-storage.service';
+import { ServiceService } from '../../services/service.service';
+import { UsersService } from '../../services/users.service';
+import { Router } from '@angular/router';
+/**/
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -8,20 +13,39 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  //variables para mostrar y ocultar sidenav
-  varAdmin = false;
+  private roles: string[];
+  isLoggin = false;
+  showFrmAdmin = false;
+  showFrmEmp = false;
+  username: string;  
 
-  //crea la propiedad togglerSidenav y despues crea la instancia de eventemitter
-  @Output() togglerSidenav = new EventEmitter<void>();
-
-  constructor() { }
+  constructor(private tokenStorage: TokenStorageService,
+              private serv: ServiceService,
+              private userServ: UsersService,
+              private router: Router ) { }
 
   ngOnInit(): void {
+    this.isLoggin = !!this.tokenStorage.getToken()  
+    /*si se ha iniciado sesion */
+    if (this.isLoggin) {
+      /*Muestra los datos del usuario dependiendo el rol */
+      const user = this.tokenStorage.getUser();
+      this.roles = user.roles;
+
+      this.showFrmAdmin = this.roles.includes('ROLE_ADMIN');
+      this.showFrmEmp = this.roles.includes('ROLE_EMPLOYEE');
+      
+      this.username = user.username;
+    }
   }
 
-  //crea el metodo 
-  onToggleSidenav(): void{
-    //cuando el user de clic en el header va mostrar el toggler
-    this.togglerSidenav.emit();
-  }
+  /*Metodo para cerrar sesion */
+  logout(): void{
+    this.tokenStorage.signOut();
+    //this.router.navigateByUrl('/login');
+    window.location.reload();
+    //this.router.navigate(['/home']);
+    //window.stop();
+  }  
+
 }
