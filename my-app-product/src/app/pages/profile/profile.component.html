@@ -1,0 +1,24 @@
+<div class="container" *ngIf="rolUser; else loggedOut">
+    <mat-card class="border">
+        <h1 class="text-center">Bienvenido</h1>
+        <div>
+            <p> 
+                <strong >Usuario:</strong>
+                    {{ rolUser.username }}
+            </p>
+            <p>
+                <strong>Email:</strong>
+                    {{ rolUser.email }}
+            </p>
+            <strong>Rol:</strong>
+            <ul class="list-group" data-toggle="tooltip">
+                <li class="list-group-item" *ngFor="let role of rolUser.roles">
+                    {{ role }}
+                </li>
+            </ul>
+        </div>
+    </mat-card>
+</div>
+<ng-template #loggedOut>
+    Please login.
+</ng-template>

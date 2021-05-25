@@ -1,0 +1,14 @@
+.profile-form {
+    padding: 4rem 1rem;
+  
+  }
+
+mat-card {
+    max-width: 300px;
+    max-height: 300px;
+    margin: 2rem auto;
+    text-align: inherit;
+    height: 230px;
+    margin-top: 80px;
+    box-sizing: content-box;
+}
