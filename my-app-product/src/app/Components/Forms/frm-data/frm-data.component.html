@@ -1,7 +1,7 @@
-<p>frm-data works!</p>
-<div class="list row">
-    <div class="col-md-6">
-      <h4>Lista de productos</h4>
+<p>{{ content }}</p>
+<div class="list row d-flex justify-content-evenly" *ngIf="rol">
+    <div class="col-md-5">
+      <h4 style="text-align: center;"><strong>Lista de productos</strong></h4>
       <ul class="list-group" data-toggle="tooltip" title="Seleccione un producto" >
         <li class="list-group-item list-group-item-warning" *ngFor="let product of products; let i = index"
           [class.active]="i == currentIndex" (click)="setActiveProduct(product, i)">
@@ -14,9 +14,9 @@
           Eliminar todos
         </button>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-5">
       <div *ngIf="currentProduct" class="edit-form">
-        <h4>Productos</h4>
+        <h4 style="text-align: center;"><strong>Productos</strong></h4>
         <ul class="list-group" title="Detalle del producto" >
           <li class="list-group-item list-group-item-warning" >
             <div>

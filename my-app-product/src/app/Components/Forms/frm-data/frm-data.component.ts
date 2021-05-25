@@ -5,7 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { FrmCheckComponent } from 'src/app/Components/Msg/frm-check/frm-check.component';
 import { FrmOkComponent } from 'src/app/Components/Msg/frm-ok/frm-ok.component';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
-//import { TransitiveCompileNgModuleMetadata } from '@angular/compiler';
+import { UsersService } from '../../../services/users.service';
+import { TokenStorageService } from '../../../services/token-storage.service';
 //
 
 @Component({
@@ -19,14 +20,28 @@ export class FrmDataComponent implements OnInit {
   currentProduct = null;
   currentIndex = -1
   name = '';
+  content : string;
+  rol: any;
 
   constructor( private productService: ServiceService,
+               private userService: UsersService,
                public dialog: MatDialog,
-               private fb: FormBuilder 
+               private fb: FormBuilder,
+               private token: TokenStorageService 
                ) {     
               }
 
   ngOnInit(): void {
+    this.rol = this.token.getUser();
+    this.userService.getAdmin().subscribe(
+      data =>{
+        this.content = data;
+      },
+      err =>{
+        this.content = JSON.parse(err.error).message;
+      }
+    );
+
     this.recuperaProduct();
   }
 
