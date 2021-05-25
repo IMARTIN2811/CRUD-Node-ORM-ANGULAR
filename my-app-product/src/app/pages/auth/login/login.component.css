@@ -1,15 +1,14 @@
 .login-form {
     padding: 4rem 1rem;
-  
   }
 
 mat-card {
-    max-width: 300px;
-    max-height: 300px;
-    margin: 2rem auto;
+    max-width: 320px;
+    max-height: 350px;
+    margin: auto;
     text-align: center;
-    height: 350px;
-    margin-top: 20px;
+    box-sizing: content-box;
+    /* height: 280px;*/
   }
 
 .full-width-input
@@ -22,5 +21,5 @@ mat-card {
   }
 
   .separator {
-    margin-bottom: 2rem;
+    margin-bottom: 10px;
   }

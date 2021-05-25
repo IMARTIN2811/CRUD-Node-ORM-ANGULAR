@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login.component';
 //importanciones
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../../../material.module';
+import { from } from 'rxjs';
 ///
 
 
@@ -17,7 +19,9 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     //importaciones
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule
     //
   ]
 })
