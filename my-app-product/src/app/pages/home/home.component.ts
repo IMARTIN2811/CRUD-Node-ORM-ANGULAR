@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+/*Se hacen las importaciones */
+import { UsersService  } from '../../services/users.service';
+/**/
 
 @Component({
   selector: 'app-home',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  content: string;
+
+  constructor( private userService: UsersService ) { }
 
   ngOnInit(): void {
+    /*llama el servicio y el metodo getPublic*/
+    this.userService.getContentPublic().subscribe(
+      data =>{
+        this.content = data;
+      },
+      err =>{
+        this.content = JSON.parse(err.error).message;
+      }
+    );
   }
 
 }
