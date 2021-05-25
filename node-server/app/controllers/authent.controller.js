@@ -1,12 +1,12 @@
 //se hacen las importaciones
-const db = require('../models');
-const config = require('../config/auth.config');
-const User = db.users;
+const db = require("../models");
+const config = require("../config/auth.config");
+const User = db.user;
 const Role = db.role;
 const Op = db.Sequelize.Op;
 
-var jwt = require('jsonwebtoken');
-var bcrypt = require('bcryptjs');
+var jwt = require("jsonwebtoken");
+var bcrypt = require("bcryptjs");
 //const { role } = require('../models');
 //
 
@@ -30,12 +30,12 @@ exports.register = (req,res) => {
             //Despues verificar el rol se guardan los datos
             }).then(roles =>{
                 user.setRoles(roles).then(()=>{
-                    res.send({ message: 'Datos registrados exitosamente' });
+                    res.send({ message: "Datos registrados exitosamente" });
                 });
             });
-        }else{
+        } else {
             user.setRoles([1]).then(()=> {
-                res.send({ message: 'Datos registrados exitosamente' });
+                res.send({ message: "Datos registrados exitosamente" });
             });
         }
         //Si no guarda los dayos mandara un mensaje de error
@@ -54,7 +54,7 @@ exports.login = (req,res) =>{
     //si el usuario es diferente mandara un mensaje
     }).then(user =>{
         if (!user) {
-            return res.status(404).send({ message: '¡Usuario no encontrado!' })
+            return res.status(404).send({ message: '¡Usuario no encontrado!' });
         }
 
         //encripta el password del user
@@ -72,13 +72,13 @@ exports.login = (req,res) =>{
         }
 
         //se genera el token y el tiempo de expiracion
-        var  token = jwt.sign({ id: user.id }, config.secret, {
+        var token = jwt.sign({ id: user.id }, config.secret, {
             //Especifica el tiempo de expiracion,86400 equivale a 24 hrs 
             expiresIn: 86400 
         });
 
         //Se Especifica el rol del usuario y accede a sus datos 
-        var author = []
+        var author = [];
         //accede al rol del user
         user.getRoles().then(roles =>{
             //repite el rol para varios usuarios
@@ -90,6 +90,7 @@ exports.login = (req,res) =>{
             res.status(200).send({
                 id: user.id,
                 username: user.username,
+                email: user.email,
                 roles: author,
                 accessToken: token
             });
