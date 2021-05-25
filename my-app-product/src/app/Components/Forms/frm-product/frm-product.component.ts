@@ -5,6 +5,8 @@ import { FormGroup,FormBuilder, Validators }  from '@angular/forms'
 import { FrmOkComponent } from 'src/app/Components/Msg/frm-ok/frm-ok.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute,Router } from '@angular/router';
+import {  UsersService } from '../../../services/users.service';
+import { TokenStorageService } from '../../../services/token-storage.service';
 //
 
 @Component({
@@ -16,6 +18,8 @@ export class FrmProductComponent implements OnInit {
 
   angForm: FormGroup;
   currentProducts = null;
+  content: string;
+  rol: any;
 
   producto = {
     name: '',
@@ -26,10 +30,12 @@ export class FrmProductComponent implements OnInit {
   
   constructor(
     private servicio: ServiceService,
+    private usersService: UsersService,
     private fb: FormBuilder,
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private token: TokenStorageService
   ) {
     this.angForm = this.fb.group({
       name: ['', [Validators.required]],
@@ -38,7 +44,17 @@ export class FrmProductComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    
+    this.rol = this.token.getUser();
     this.getProducts(this.route.snapshot.paramMap.get('id'));
+    this.usersService.getAdmin().subscribe(
+      data =>{
+        this.content = data;
+      },
+      err =>{
+        this.content = JSON.parse(err.error).message;
+      }
+    );
   }
 
   //accedea a todos los productos por id
