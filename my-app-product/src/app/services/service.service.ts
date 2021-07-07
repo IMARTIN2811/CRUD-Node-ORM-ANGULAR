@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 //se importan las librerias
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { HttpClient,HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 /*Terminan las importaciones*/
 
 const C_baseUrl = 'http://localhost:8080/api/products';
 const C_baseUrl2 = 'http://localhost:8080/api/auth/';
+
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })  
@@ -46,8 +47,6 @@ export class ServiceService {
   findByTitle(title):Observable<any>{
     return this.http.get(`${C_baseUrl}? title=${title}`);
   }
- 
-  URL = C_baseUrl;
   /*Termina la configuracion para el api de products*/
 
   /*Inicia la configuracion para la ruta api de auth*/
@@ -71,5 +70,4 @@ export class ServiceService {
     return this.http.post<Boolean>(C_baseUrl2 + 'logout', {});
   }
   /*Termina la configuracion para el api*/
-
 }
