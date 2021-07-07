@@ -14,7 +14,7 @@ export class FrmRegisterComponent implements OnInit {
 
   hide = true;
   form: any = {};
-  MsgSuccessful = false;
+  MsgSuccessful = '';
   MsgSignupFailed = false;
   ErrorMsg = '';
   //submitted = false;
@@ -31,7 +31,7 @@ export class FrmRegisterComponent implements OnInit {
     this.service.getRegister(this.form).subscribe(
       data => {
         console.log(data)
-        this.MsgSuccessful = true;
+        this.MsgSuccessful = 'Se ha guardado correctamente';
         this.MsgSignupFailed = false;
       },
       //si hay algun error en el registro mandara el mensaje

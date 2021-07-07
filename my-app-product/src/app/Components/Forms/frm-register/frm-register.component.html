@@ -2,8 +2,9 @@
     <mat-card class="border">
         <mat-card-content>
             <h1>REGISTER</h1>
-            <form *ngIf="!MsgSuccessful" name="form" (ngSubmit)="f.form.valid && saveUsers()" 
+            <form name="form" (ngSubmit)="f.form.valid && saveUsers()" 
                 #f="ngForm" novalidate>
+                <div class="form-group">
                     <mat-form-field class="full-width-input">
                         <input type="text" matInput placeholder="Username" name="username" 
                             [(ngModel)]="form.username" required minlength="3" maxlength="20" #username="ngModel">
@@ -45,14 +46,15 @@
                             </div>
                     </mat-form-field>
                     <button mat-raised-button class="btn-block" color="primary">Registrarse</button>
-                    <div style="margin: 10px;"> 
-                        <div class="alert alert-success" *ngIf="MsgSuccessful">
-                            Se ha registrado corrrectamente
-                        </div>
-                    </div>
+                </div>
                     <div style="margin: 10px;">
                         <div class="alert alert-warning" *ngIf="f.submitted && MsgSignupFailed">
                             {{ ErrorMsg }}
+                        </div>
+                    </div>
+                    <div style="margin: 10px;"> 
+                        <div class="alert alert-success" *ngIf="MsgSuccessful">
+                            Se ha registrado corrrectamente
                         </div>
                     </div>
             </form>
