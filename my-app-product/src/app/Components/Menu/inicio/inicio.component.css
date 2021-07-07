@@ -1,0 +1,62 @@
+mat-card {    
+  /*26%*/
+    width: 50px;
+    box-sizing: content-box;
+    
+}
+
+.zoom{
+  transition: 1.5s ease;
+  -moz-transition: 1.5s ease; /*Firefox*/
+  -webkit-transition: 1.5s ease; /*Chrome y Safari*/
+}
+
+.zoom:hover{
+  transform: scale(2);
+  -moz-transform: scale(2);/*Firefox*/
+  -webkit-transform: scale(1.8); /*Chrome y Safari*/
+  -o-transform: scale(2); /*Para Opera*/
+  -ms-transform: scale(2); /*Para internet*/
+  cursor: pointer;
+  filter: sepia(60%);
+}
+
+.flex-container {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    -ms-box-orient: horizontal;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+  }
+  
+  .wrap { 
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }  
+  
+  .example-card {
+    /* background: tomato;
+    padding: 4%; */
+    width: 280px;
+    margin: 10px;
+    border-style: none;
+  }
+  
+  @media (max-width: 480px) {
+    .example-card {
+        /* background: tomato;
+        padding: 4%; */
+        width: 100%;
+        margin: 10px;
+      } 
+  }
+  .centered {
+    position: fixed; /* or absolute */
+    top: 45%;
+    left: 45%;
+  }
