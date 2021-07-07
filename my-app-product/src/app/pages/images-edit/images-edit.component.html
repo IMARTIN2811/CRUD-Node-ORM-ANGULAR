@@ -1,0 +1,29 @@
+<div class="img-form">
+    <div class="container">
+        <!---->
+        <mat-card class="border">
+            <mat-card-content>
+                <h1 class="align-text">Actualizar datos</h1>
+                <form (submit)="UpdateImage($event)" ngNativeValidate>
+                    <div>
+                        <input type="file" accept="image/*" name="file" (change)="fileUpload($event)">
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <div class="card">
+                            <img class="card-img-top" [src]="imgUrl" width="150px" height="120px">
+                        </div>
+                    </div>
+                    <!--
+                    <div class="align-texttarea">
+                        <textarea name="description" [(ngModel)]="dataUpdate.description" cols="40" rows="3" style="width: 80%;"></textarea>
+                    </div>
+                    -->
+                    <div class="align-btn">
+                        <button type="submit" [disabled]="!selectFile" class="btn btn-primary mr-2">Actualizar</button>
+                        <button type="button" class="btn btn-primary" (click)="close()">Cerrar</button>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

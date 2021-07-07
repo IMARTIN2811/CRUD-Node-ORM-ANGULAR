@@ -1,0 +1,20 @@
+.image-form{
+    padding: 4rem 1rem;
+}
+
+mat-card {
+    max-width: 320px;
+    max-height: 420px;
+    margin: auto;
+    text-align: center;
+    box-sizing: content-box;
+    margin-top: 30px;
+}
+
+.full-width-input{
+    width: 100%;
+}
+
+button{
+    width: 40%;
+}

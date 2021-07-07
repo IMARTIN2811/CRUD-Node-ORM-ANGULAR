@@ -1,0 +1,38 @@
+<p>{{content}}</p>
+<div class="container" *ngIf="rol">
+  <mat-card class="border">
+    <mat-card-content>
+      <h1>Imagenes</h1>
+      <form name="form" (submit)="saveImages($event)" #f="ngForm" novalidate>
+        <div class="form-group">
+          <div>
+            <input type="file" #Img accept="image/*"  [(ngModel)]='imagen.file' name="file" (change)="selectImage($event)">
+          </div>
+          <div style="margin-top: 10px;">
+            <div class="progress" *ngIf="progress" style="height: 20px;margin-bottom:20px;">
+              <div class="progress-bar progress-bar-striped bg-info" role="progressbar" 
+              [style.width]="progress + '%'">{{progress}}%</div>
+            </div>
+          </div>
+          <div style="margin-top: 10px;" >
+            <div class="card">
+              <img class="card-img-top" id="imagen" name="img" [src]="imgURL" width="150px" height="100px" >
+            </div>
+          </div>
+          <div style="margin-top: 10px;">
+            <textarea [(ngModel)]='imagen.description' name="description"  cols="40" rows="3" style="width: 80%" required></textarea>
+          </div>
+          <div style="margin-top: 10px;">
+            <button class="btn btn-primary mr-2" [disabled]="!SelectFile">Guardar</button>
+            <button  [disabled]="f.form.invalid" (click)="clearForm()" class="btn btn-primary">Nuevo</button>
+          </div>
+        </div>
+        <div style="margin-top: 10px;"> 
+          <div class="alert alert-success" *ngIf="MsgSuccess">
+            {{ MsgSuccess }}
+          </div>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

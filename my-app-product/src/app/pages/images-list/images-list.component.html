@@ -1,0 +1,56 @@
+<p>{{ content }}</p>
+    <div class="container" *ngIf="rol" >
+    <ng-container *ngIf="data.length !=0; else loading">
+        <h3 style="text-align: center; margin-top: 10px;">Listado de imágenes</h3>
+        <div class="search-results" infiniteScroll [infiniteSrollDistance]="2"  
+        [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+        <mat-card class="border">
+            <mat-card-content>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="table-primary">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">Imagen</th>
+                                <th scope="col">Fecha creación</th>
+                                <th scope="col">Fecha actualización</th>
+                                <th colspan="2" scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-success table-striped">
+                            <tr *ngFor="let images of data;">
+                                <th scope="row">{{images.id}}</th>
+                                <th class="table-content" scope="row">{{images.description}}</th>
+                                <th scope="row">
+                                    <img class="card-img-top rounded zoom" style="width: 130px; height: 90px;" 
+                                    src="data:image/jpeg;base64,{{images.url}}">
+                                </th>
+                                <th class="table-content" scope="row">{{images.createdAt | date: 'dd/MM/yyyy'}}</th>
+                                <th class="table-content" scope="row">{{images.updatedAt | date: 'dd/MM/yyyy'}}</th>
+                                <th scope="row">
+                                    <button type="button" class="btn btn-primary" (click)="getFrmEditComp(images.id)">Editar</button>
+                                </th>
+                                <th scope="row">
+                                    <button type="button" class="btn btn-primary" (click)="getFrmDelete()">Eliminar</button>
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>                
+            </mat-card-content>
+        </mat-card>
+        </div>
+    </ng-container>
+    <div class="row pb-5">
+        <div class="col-md-12 p-5">
+            <ngx-spinner bdOpacity = 0.9 bdColor = "" size = "default" color = "#581f87" type = "ball-pulse-sync" [fullScreen] = "false">
+            </ngx-spinner>
+      </div>
+    </div>
+    <ng-template #loading>
+        <div style="text-align: center;">
+            <h2>Espere un momento. Cargando datos...</h2>
+            </div>
+    </ng-template>
+    </div>

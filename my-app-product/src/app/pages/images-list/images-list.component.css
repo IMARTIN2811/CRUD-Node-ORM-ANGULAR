@@ -1,0 +1,34 @@
+
+.image-list{
+    padding: 4rem 1rem;
+}
+
+mat-card {
+    width: 693px;
+    margin: 0 auto;
+    box-sizing: content-box;
+    table-layout: fixed;
+    overflow: hidden;
+}
+
+.border-table{
+    border: 5px;
+}
+
+/*Encabezado mismo tamaño*/
+.thtable{
+    table-layout: auto;
+    width: 100%;
+    word-wrap: break-word;
+}
+
+/*Cambiar el tipo de letra del contenido de tbody*/
+.table-content{
+    font-weight: normal;
+    font-family: Arial;
+    
+}
+
+th{
+    text-align: center;
+}
