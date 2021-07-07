@@ -46,8 +46,7 @@ export class FrmUpdateComponent implements OnInit {
 
   getProducts(id): void {
     this.productService.get(id)
-    .subscribe(
-      data => {
+    .subscribe(data => {
         this.currentProducts = data;
         console.log(data);
       },

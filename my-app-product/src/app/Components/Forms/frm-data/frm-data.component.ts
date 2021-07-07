@@ -4,7 +4,6 @@ import { ServiceService } from 'src/app/services/service.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FrmCheckComponent } from 'src/app/Components/Msg/frm-check/frm-check.component';
 import { FrmOkComponent } from 'src/app/Components/Msg/frm-ok/frm-ok.component';
-import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { UsersService } from '../../../services/users.service';
 import { TokenStorageService } from '../../../services/token-storage.service';
 //
@@ -26,7 +25,6 @@ export class FrmDataComponent implements OnInit {
   constructor( private productService: ServiceService,
                private userService: UsersService,
                public dialog: MatDialog,
-               private fb: FormBuilder,
                private token: TokenStorageService 
                ) {     
               }
