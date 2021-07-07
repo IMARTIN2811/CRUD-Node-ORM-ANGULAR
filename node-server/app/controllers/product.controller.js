@@ -99,11 +99,11 @@ exports.delete = (req,res)=> {
     .then(num => {
         if (num == 1) {
             res.send({
-                message: "El prodcuto se ha eliminado correctamente!"
+                message: "El producto se ha eliminado correctamente!"
             });
         } else {
             res.send({
-                message: `No se pudo eliminar el producto con id=${id}. Quizas no se encontró el tutorial!`
+                message: `No se pudo eliminar el producto con id=${id}`
             });
         }
     })

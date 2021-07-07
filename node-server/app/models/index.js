@@ -19,10 +19,10 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.tutorials = require("./tutorial.model.js")(sequelize, Sequelize);
 db.products = require("./product.model.js")(sequelize,Sequelize);
 db.user = require("./User.model.js")(sequelize,Sequelize);
 db.role = require("./role.model.js")(sequelize,Sequelize);
+db.img = require("./image.model.js")(sequelize,Sequelize);
 
 //indica que el modelo de usuario puede pertenecer a muchos roles y viceversa.
 db.role.belongsToMany(db.user, {
@@ -38,6 +38,15 @@ db.user.belongsToMany(db.role,{
   foreignKey: "userId",
   otherKey: "roleId"
 });
+
+//Relacion de uno a muchos
+/* 
+db.user.hasMany(db.images,{ as: "ImagesUser"});
+db.images.belongsTo(db.user, {
+  foreignKey: "userId",
+  as: "users",
+});
+*/
 
 db.ROLES = ["user","admin", "employee"];
 
