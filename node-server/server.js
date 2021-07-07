@@ -17,12 +17,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //se agregan las rutas en el server.js
+global.__basedir = __dirname;
 require("./app/routes/product.routes")(app);
 require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);
+require("./app/routes/images.routes")(app);
+
 
 const db = require("./app/models");
-const Role = db.role;
+const Role = db.role
 
 db.sequelize.sync();
 // // drop the table if it already exists
