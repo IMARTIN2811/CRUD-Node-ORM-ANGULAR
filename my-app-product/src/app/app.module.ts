@@ -48,6 +48,7 @@ const routes: Routes = [
   { path: 'images', loadChildren: () => import('./pages/images/images.module').then(m => m.ImagesModule) },
   { path: 'imgList', loadChildren: () => import('./pages/images-list/images-list.module').then(m => m.ImagesListModule) },
   { path: 'edit-image', loadChildren: () => import('./pages/images-edit/images-edit.module').then(m => m.ImagesEditModule) },
+  { path: 'view-list', loadChildren: () => import('./Components/Forms/frm-view/frm-view.module').then(m => m.FrmViewModule) },
   { path: '**',component: Page404Component, pathMatch:'full' }
   
   //{ path: 'modal', loadChildren: () => import('./pages/modal/modal.module').then(m => m.ModalModule) },
