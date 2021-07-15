@@ -1,0 +1,24 @@
+mat-card {
+    width: 700px;
+    margin: 0 auto;
+    margin-top: 2px;
+}
+
+.table-content{
+    font-weight: normal;
+    font-family: Arial;
+}
+/*
+table{
+    table-layout: fixed;
+}
+*/
+th, td{
+    word-wrap: break-word;
+    text-align: center;
+}
+
+.btn-dw{
+    margin-top: 10px;
+    text-align: center;
+}

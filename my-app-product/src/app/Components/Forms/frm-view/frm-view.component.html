@@ -1,0 +1,37 @@
+<p>{{content}}</p>
+<div class="container" *ngIf="rol">
+    <ng-container>
+        <h3 style="text-align: center; margin-top: 4px;">Listado de productos</h3>
+        <mat-card class="border">
+            <mat-card-content>
+                <div id="listProduct" #listProduct>
+                    <table class="table table-bordered">
+                        <thead class="table-primary">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Fecha de creación</th>
+                                <th scope="col">Fecha de actualización</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-success table-striped">
+                            <tr *ngFor="let product of products;">
+                                <th class="scope ">{{product.id}}</th>
+                                <th class="scope table-content">{{product.name}}</th>
+                                <th class="scope table-content">{{product.price}}</th>
+                                <th class="scope table-content">{{product.createdAt | date: 'dd/MM/yyyy'}}</th>
+                                <th class="scope table-content">{{product.updatedAt | date: 'dd/MM/yyyy'}}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <div class="btn-dw">
+            <button type="button" class="btn btn-success" (click)="downDocPdf()">
+                <i class="fas fa-file-export"></i>
+                EXPORTAR</button>
+        </div>
+    </ng-container>
+</div>
