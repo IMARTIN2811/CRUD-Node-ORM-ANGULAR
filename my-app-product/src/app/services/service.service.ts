@@ -41,11 +41,11 @@ export class ServiceService {
     return this.http.delete(`${C_baseUrl}/${id}`);
   }
   //
-  deleleAll():Observable<any>{
+  deleteAll():Observable<any>{
     return this.http.delete(C_baseUrl);
   }
-  findByTitle(title):Observable<any>{
-    return this.http.get(`${C_baseUrl}? title=${title}`);
+  findByProduct(name):Observable<any>{
+    return this.http.get(`${C_baseUrl}?name=${name}`);
   }
   /*Termina la configuracion para el api de products*/
 
