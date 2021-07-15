@@ -66,6 +66,17 @@ export class FrmDataComponent implements OnInit {
     this.currentIndex = index;
   }
 
+  searchProduct(): void{
+    this.productService.findByProduct(this.name)
+      .subscribe(data=>{
+        this.products = data;
+        console.log(data);
+      },
+      error=> {
+        console.log(error);
+      });
+  }
+
   /*
   removeAllProducts(): void {
     this.productService.deleleAll()
@@ -89,7 +100,7 @@ export class FrmDataComponent implements OnInit {
     .afterClosed()
       .subscribe((confirmar: Boolean) => {
         if (confirmar) {
-          this.productService.deleleAll()
+          this.productService.deleteAll()
       .subscribe(
         response =>{
           console.log(response);

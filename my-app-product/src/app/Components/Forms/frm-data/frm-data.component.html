@@ -1,30 +1,31 @@
 <p>{{ content }}</p>
-<div class="list row d-flex justify-content-evenly" *ngIf="rol">
+<div class="list d-flex justify-content-evenly" *ngIf="rol">  
     <div class="col-md-5">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Buscar producto" [(ngModel)]="name">
+        <button type="button" class="btn btn-primary" (click)="searchProduct()">Buscar</button>
+      </div>
       <h4 style="text-align: center;"><strong>Lista de productos</strong></h4>
-      <ul class="list-group" data-toggle="tooltip" title="Seleccione un producto" >
+      <ul class="list-group" data-toggle="tooltip" title="Seleccione un producto">
         <li class="list-group-item list-group-item-warning" *ngFor="let product of products; let i = index"
           [class.active]="i == currentIndex" (click)="setActiveProduct(product, i)">
           {{ product.name }}
         </li> 
       </ul>
-        <button class="m-3 btn btn-sm btn-danger" (click)="mostrarDialog()" 
-          title="Eliminar todos los productos"> 
+        <button class="m-3 btn btn-sm btn-danger" (click)="mostrarDialog()" title="Eliminar todos los productos"> 
           <i class="fas fa-trash-alt"></i>
           Eliminar todos
         </button>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-5" style="margin-top: 53px;">
       <div *ngIf="currentProduct" class="edit-form">
         <h4 style="text-align: center;"><strong>Productos</strong></h4>
         <ul class="list-group" title="Detalle del producto" >
           <li class="list-group-item list-group-item-warning" >
-            <div>
-              <strong>Name:</strong>
+            <div><strong>Name:</strong>
               {{ currentProduct.name }}
             </div>
-            <div>
-              <strong>Price:</strong>
+            <div><strong>Price:</strong>
               {{ currentProduct.price }}
             </div> 
             <div>
