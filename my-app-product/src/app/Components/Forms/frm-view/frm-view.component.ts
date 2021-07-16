@@ -19,7 +19,7 @@ import { DatePipe } from '@angular/common';
 export class FrmViewComponent implements OnInit {
   //@ViewChild('listProduct', { static:false }) View:ElementRef;
   @ViewChild('listProduct') pdfTable;
-  products: any;
+  products = [];
   rol:any;
   content: string;
 

@@ -1,6 +1,6 @@
 <p>{{content}}</p>
 <div class="container" *ngIf="rol">
-    <ng-container>
+    <ng-container *ngIf="products.length !=0; else loading">
         <h3 style="text-align: center; margin-top: 4px;">Listado de productos</h3>
         <mat-card class="border">
             <mat-card-content>
@@ -34,4 +34,9 @@
                 EXPORTAR</button>
         </div>
     </ng-container>
+    <ng-template #loading> 
+        <div style="text-align: center;">
+            <h2>Cargando datos...</h2>
+        </div>
+    </ng-template>
 </div>
