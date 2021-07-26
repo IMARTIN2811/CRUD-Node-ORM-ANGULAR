@@ -8,6 +8,7 @@ import pdfMake from 'pdfmake/build/pdfMake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 import { DatePipe } from '@angular/common';
+import { Utils } from '../Utils/utils';
 /* */
 
 @Component({
@@ -22,6 +23,9 @@ export class FrmViewComponent implements OnInit {
   products = [];
   rol:any;
   content: string;
+  imgURL: string;
+  str2 = new String("$");
+  str1: any; 
 
   constructor(private productService: ServiceService,
               private token: TokenStorageService,
@@ -29,6 +33,7 @@ export class FrmViewComponent implements OnInit {
               public datePipe: DatePipe) { }
 
   ngOnInit(): void {
+    //Permite agregar el rol a componente
     this.rol = this.token.getUser();
     this.userService.getAdmin().subscribe(
       data=>{
@@ -38,7 +43,14 @@ export class FrmViewComponent implements OnInit {
         this.content = JSON.parse(err.error).message;
       }
     );
+    //Llama el metodo para visualizar los datos al ejecutar la app
     this.showProducts();  
+    
+    //Se llama el metodo y se le asigna la ruta de la imagen
+    Utils.getImageDataUrlFromLocalPath1('assets/images/logo.png').then(
+      result => this.imgURL = result
+    )  
+
   }
 
   /*Se crea el método  y hace la peticion get */
@@ -57,23 +69,36 @@ export class FrmViewComponent implements OnInit {
   downDocPdf(action = 'open'){
     const doc = new jsPDF;
     const pdfTable = this.pdfTable.nativeElement;
-  
+    
+    //Se crea el contenido del documento
     const documentDefinition = { 
+      //Hace que la pagina sea tamaño carta
+      pageSize: 'LETTER',
+      //se agrega el encabezado y una img al documento
+      header: {
+        image: this.imgURL,
+        fit: [150,75],
+        margin: [40,30],
+      },
+      images:{
+        imageHead: 'data:image/jpeg;base64,...encodedContent...'
+      },
+      //Se realizan las configuraciones del contenido del documento
       content: [
       {
-        text: 'Demo a PDF',
-        fontSize: 16,
-        alignment: 'left',
-        bold: 'true',
-        decoration: 'underline'
+        text: 'Demo PDF',
+        style: 'sectionHeader',
+        alignment: 'center'
       },
+      {text: 'Datos de la empresa', bold:'true', 
+        alignment:'left',fontSize:14},
       {text: 'XtendIT América SA de CV'},
       {text: 'Calle Francisco 355'},
-      {text: 'Leones,64600, Monterrey Nuevo León'},
+      {text: 'Leones,CP. 64600, Mty. Nuevo León'},
       {
-        text: 'Datos del empleado',
-        style: 'sectionHeader'
+        text: 'Datos del empleado',style: 'sectionHeader'
       },
+      //Se crea una columna con los datos del user, fecha/hora del documento
       {
         columns:[
           [
@@ -96,33 +121,71 @@ export class FrmViewComponent implements OnInit {
         text: 'Detalles',
         style: 'sectionHeader'
       },
-      {
+      //Se crea un tabla con los datos que desea imprimir 
+      {  
+      margin: [20,10],
+      //layout: 'noBorders',
+      alignment: 'center',
         table:{
           headerRows: 1,
           widths: ['*','auto','auto','auto','auto'],
           body:[
-            ['ID','NOMBRE','FECHA CREACIÓN','FECHA ACTUALIZACIÓN','PRECIO'],
-            ...this.products.map(p=>([p.id,p.name,
+            [{text:'ID',fillColor: '#642EFE',bold:true},
+             {text:'NOMBRE',fillColor: '#642EFE',bold:true},
+             {text:'FECHA CREACIÓN',fillColor: '#642EFE',bold:true},
+             {text:'FECHA ACTUALIZACIÓN',fillColor: '#642EFE',bold:true},
+             {text:'PRECIO',fillColor: '#642EFE',bold:true}],
+            ...this.products.map(p=>([ p.id,p.name, 
               this.datePipe.transform(p.createdAt, 'dd/MM/yyyy'),
               this.datePipe.transform(p.updatedAt, 'dd/MM/yyyy'),p.price])),
-              [{text:'Total:', colSpan: 4},{},{},{},this.products.reduce((sum,p)=> sum + (p.price ++),0)]
-          ],
+              [{text:'Total:',bold:true,alignment: 'left', 
+              colSpan: 4},{},{},{},this.products.reduce((sum,p)=> sum + (p.price ++),0)]
+          ]
         }
+      },{
+        text: 'Detalles adicionales',
+        style: 'sectionHeader',
+      },
+        {
+          columns: [
+          [ 
+            {text: 'Para mas información, escanea el código:'},
+            {qr:'text in QR', fit: '50'}
+          ],
+        ]
       }],
+      //aplica estilos alos titulos 
       styles: {
         sectionHeader: {
           bold: true,
-          decoration: 'underline',
+          //decoration: 'underline',
           fontSize: 14,
-          margin: [0, 15,0, 15]          
-        }
-      } 
+          margin: [0,30,0, 15]          
+        },
+      }, 
+
+      //Se agrega el footer
+      footer: function (currentPage, pageCount) {
+        return{
+          table:{
+            widths: ['*'],
+            body: [
+              [{text: 'Página: ' + currentPage + " ", alignment:'right', pageCount}]
+            ]
+          },
+          layout: 'noBorders',
+          margin: [39,10]
+        };
+      },
     };
+    //accion para descargar la imagen 
     if (action === 'download'){
       pdfMake.createPdf(documentDefinition).download();
     }
+    //accion para imprimir
     else if (action === 'print'){
       pdfMake.createPdf(documentDefinition).print();
+    //accion para visualizar el documento
     }else{
       pdfMake.createPdf(documentDefinition).open();
     }
