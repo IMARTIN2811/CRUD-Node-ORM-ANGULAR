@@ -158,7 +158,6 @@ export class FrmViewComponent implements OnInit {
       styles: {
         sectionHeader: {
           bold: true,
-          //decoration: 'underline',
           fontSize: 14,
           margin: [0,30,0, 15]          
         },
@@ -170,7 +169,7 @@ export class FrmViewComponent implements OnInit {
           table:{
             widths: ['*'],
             body: [
-              [{text: 'Página: ' + currentPage + " ", alignment:'right', pageCount}]
+              [{text: 'Página: ' + currentPage + " de " + pageCount, alignment:'right'}]
             ]
           },
           layout: 'noBorders',
