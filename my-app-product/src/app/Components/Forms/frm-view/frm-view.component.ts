@@ -129,6 +129,7 @@ export class FrmViewComponent implements OnInit {
         table:{
           headerRows: 1,
           widths: ['*','auto','auto','auto','auto'],
+          heights:[30],
           body:[
             [{text:'ID',fillColor: '#642EFE',bold:true},
              {text:'NOMBRE',fillColor: '#642EFE',bold:true},
@@ -140,7 +141,7 @@ export class FrmViewComponent implements OnInit {
               this.datePipe.transform(p.updatedAt, 'dd/MM/yyyy'),p.price])),
               [{text:'Total:',bold:true,alignment: 'left', 
               colSpan: 4},{},{},{},this.products.reduce((sum,p)=> sum + (p.price ++),0)]
-          ]
+          ],
         }
       },{
         text: 'Detalles adicionales',
@@ -177,6 +178,7 @@ export class FrmViewComponent implements OnInit {
         };
       },
     };
+
     //accion para descargar la imagen 
     if (action === 'download'){
       pdfMake.createPdf(documentDefinition).download();

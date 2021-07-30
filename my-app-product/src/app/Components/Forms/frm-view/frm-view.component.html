@@ -29,9 +29,12 @@
             </mat-card-content>
         </mat-card>
         <div class="btn-dw">
-            <button type="button" class="btn btn-success" (click)="downDocPdf()">
+            <button type="button" class="btn btn-success mr-5" (click)="downDocPdf()">
                 <i class="fas fa-file-export"></i>
-                EXPORTAR</button>
+                ABRIR EN PDF</button>
+            <button type="button" class="btn btn-success mr-2" (click)="downDocPdf('print')">
+                <i class="fas fa-print"></i>
+                IMPRIMIR</button>
         </div>
     </ng-container>
     <ng-template #loading> 
