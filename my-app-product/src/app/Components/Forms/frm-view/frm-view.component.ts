@@ -24,8 +24,6 @@ export class FrmViewComponent implements OnInit {
   rol:any;
   content: string;
   imgURL: string;
-  str2 = new String("$");
-  str1: any; 
 
   constructor(private productService: ServiceService,
               private token: TokenStorageService,
@@ -85,13 +83,7 @@ export class FrmViewComponent implements OnInit {
       },
       //Se realizan las configuraciones del contenido del documento
       content: [
-      {
-        text: 'Demo PDF',
-        style: 'sectionHeader',
-        alignment: 'center'
-      },
-      {text: 'Datos de la empresa', bold:'true', 
-        alignment:'left',fontSize:14},
+      {text: 'Datos de la empresa',style: 'sectionHeader'},
       {text: 'XtendIT América SA de CV'},
       {text: 'Calle Francisco 355'},
       {text: 'Leones,CP. 64600, Mty. Nuevo León'},
@@ -124,12 +116,10 @@ export class FrmViewComponent implements OnInit {
       //Se crea un tabla con los datos que desea imprimir 
       {  
       margin: [20,10],
-      //layout: 'noBorders',
       alignment: 'center',
         table:{
           headerRows: 1,
           widths: ['*','auto','auto','auto','auto'],
-          heights:[30],
           body:[
             [{text:'ID',fillColor: '#642EFE',bold:true},
              {text:'NOMBRE',fillColor: '#642EFE',bold:true},
@@ -142,7 +132,17 @@ export class FrmViewComponent implements OnInit {
               [{text:'Total:',bold:true,alignment: 'left', 
               colSpan: 4},{},{},{},this.products.reduce((sum,p)=> sum + (p.price ++),0)]
           ],
-        }
+          //Aumenta tamaño de toda la fila de la tabla
+          heights: function(){
+            return 17;
+          },
+        },
+        //Se agregar un color a la fila de la tabla
+        layout:{
+          fillColor: function(rowIndex,node,columnIndex){
+            return (rowIndex % 2 === 0) ? '#CCCCCC' : null;
+          },
+        },
       },{
         text: 'Detalles adicionales',
         style: 'sectionHeader',
@@ -163,8 +163,7 @@ export class FrmViewComponent implements OnInit {
           margin: [0,30,0, 15]          
         },
       }, 
-
-      //Se agrega el footer
+      //Se agrega el footer y pie de pagina
       footer: function (currentPage, pageCount) {
         return{
           table:{
