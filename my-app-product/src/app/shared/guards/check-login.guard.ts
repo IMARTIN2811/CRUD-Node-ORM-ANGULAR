@@ -28,8 +28,7 @@ export class CheckLoginGuard implements CanActivate {
     {
       /*verifica si el usuario se ha autenticado*/
       if (!this.token.getToken()) {
-        /*si no hay autent. manda un mensaje de alerta pidiendo que inicia sesion*/
-        alert('No tiene permisos para acceder a esta ruta. Favor de iniciar sesion con el rol admin')
+        /*si no hay autent. lo redirije al login*/
         this.router.navigate(['/login'])
         return false;
     }

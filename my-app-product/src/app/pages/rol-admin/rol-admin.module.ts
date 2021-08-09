@@ -3,11 +3,8 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { RolAdminComponent } from './rol-admin.component';
 
-import { CheckLoginGuard } from '../../shared/guards/check-login.guard';
-
 const routes: Routes = [
-  { path: '', component: RolAdminComponent,
-    //canActivate: [CheckLoginGuard],
+  { path: '', component: RolAdminComponent
   }
 ];
 
