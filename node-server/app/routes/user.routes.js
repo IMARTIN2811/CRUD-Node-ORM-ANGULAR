@@ -1,7 +1,7 @@
 //se hacen ñas importaciones 
 const { AuthJwt } = require("../middleware");
 const controller =  require("../controllers/user.controller");
-const ctrlrProduct = require("../controllers/user.controller");
+const ctrlrUser = require("../controllers/userAll.controller");
 //
 
 //se crea la funcion y se exporta
@@ -28,6 +28,8 @@ module.exports = function (app) {
     //configura la ruta que solo da acceso al administradpr
     app.get("/api/test/admin",[AuthJwt.verifyToken,AuthJwt.RolAdmin], controller.Admin);
 
-    //app.get("/api/prod/producto", [AuthJwt.verifyToken, AuthJwt.RolAdmin], controller.Admin);
+    //configura la ruta para visualizar los datos de todos los users
+    app.get("/api/user/all",ctrlrUser.user);
+
 };
 
