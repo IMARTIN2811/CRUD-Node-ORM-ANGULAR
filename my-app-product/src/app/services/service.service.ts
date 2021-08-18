@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 const C_baseUrl = 'http://localhost:8080/api/products';
 const C_baseUrl2 = 'http://localhost:8080/api/auth/';
-
+const C_baseUrl3 = 'http://localhost:8080/api/user/';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })  
@@ -70,4 +70,9 @@ export class ServiceService {
     return this.http.post<Boolean>(C_baseUrl2 + 'logout', {});
   }
   /*Termina la configuracion para el api*/
+
+  getAllUsers():Observable<any>{
+    return this.http.get(C_baseUrl3 + 'all');
+  }
+
 }
