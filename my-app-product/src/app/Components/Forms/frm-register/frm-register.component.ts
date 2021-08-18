@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 /*Se hacen las importaciones*/
 import { ServiceService  } from '../../../services/service.service'
 import { MatDialog } from '@angular/material/dialog'; 
-import { FrmOkComponent } from '../../Msg/frm-ok/frm-ok.component';
+import { UsersService } from 'src/app/services/users.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 /*Termina las importaciones*/
 
 @Component({
@@ -17,12 +18,23 @@ export class FrmRegisterComponent implements OnInit {
   MsgSuccessful = '';
   MsgSignupFailed = false;
   ErrorMsg = '';
-  //submitted = false;
+  content: string;
+  rol: any;
 
   constructor(private service: ServiceService,
-              private dialog: MatDialog) { }
+              private token: TokenStorageService,
+              private userService: UsersService) { }
 
   ngOnInit(): void {
+    this.rol = this.token.getUser();
+    this.userService.getAdmin().subscribe(
+      data =>{
+        this.content = data;
+      },
+      err =>{
+        this.content = JSON.parse(err.error).message;
+      }
+    );
   }
 
   //crea el metodo para guardar usuarios
