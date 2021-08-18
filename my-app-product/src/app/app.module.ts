@@ -36,7 +36,7 @@ const routes: Routes = [
   //{ path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
   { path: 'login', loadChildren: () => import('./pages/auth/login/login.module').then(m => m.LoginModule) },
-  { path: 'register', component: FrmRegisterComponent },
+  { path: 'register', component: FrmRegisterComponent, canActivate: [CheckLoginGuard] },
   { path: 'profile', loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfileModule), canActivate: [CheckLoginGuard] },
   { path: 'admin', loadChildren: () => import('./pages/rol-admin/rol-admin.module').then(m => m.RolAdminModule), canActivate: [CheckLoginGuard] },
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -49,6 +49,7 @@ const routes: Routes = [
   { path: 'imgList', loadChildren: () => import('./pages/images-list/images-list.module').then(m => m.ImagesListModule), canActivate:[CheckLoginGuard] },
   { path: 'edit-image', loadChildren: () => import('./pages/images-edit/images-edit.module').then(m => m.ImagesEditModule), canActivate: [CheckLoginGuard] },
   { path: 'view-list', loadChildren: () => import('./Components/Forms/frm-view/frm-view.module').then(m => m.FrmViewModule), canActivate: [CheckLoginGuard] },
+  { path: 'view-users', loadChildren: () => import('./Components/Forms/frm-user/frm-user.module').then(m => m.FrmUserModule), canActivate: [CheckLoginGuard] },
   { path: '**',component: Page404Component, pathMatch:'full' }
   
   //{ path: 'modal', loadChildren: () => import('./pages/modal/modal.module').then(m => m.ModalModule) },
