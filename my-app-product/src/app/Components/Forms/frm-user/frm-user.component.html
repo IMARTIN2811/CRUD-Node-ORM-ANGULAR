@@ -1,0 +1,32 @@
+<div class="container">
+    <ng-container *ngIf="showUsers?.length !=0; else loading">
+        <h3 style="text-align: center;">Listado de usuarios</h3>
+            <mat-card class="border">
+                <mat-card-content>
+                    <table class="table table-bordered">
+                        <thead class="table-primary">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">USUARIO</th>
+                                <th scope="col">EMAIL</th>
+                                <th scope="col">FECHA ALTA</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-success table-stripped">
+                            <tr *ngFor="let usuario of showUsers">
+                                <th class="table-content scope">{{usuario.id}}</th>
+                                <th class="table-content scope">{{usuario.username}}</th>
+                                <th class="table-content scope">{{usuario.email}}</th>
+                                <th class="table-content scope">{{usuario.createdAt | date: 'dd/MM/yyyy'}}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </mat-card-content>
+            </mat-card>
+    </ng-container>
+    <ng-template #loading>
+        <div style="text-align: center;">
+            <h2>Cargando dato...</h2>
+        </div>
+    </ng-template>
+</div>
