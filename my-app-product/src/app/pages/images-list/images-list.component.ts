@@ -82,8 +82,9 @@ export class ImagesListComponent implements OnInit {
       }
     });
   } 
-   getFrmDelete(id){
-     const dialogRef = this.dialog.open(FrmCheckComponent,{ disableClose: true,
+
+  getFrmDelete(id){
+    const dialogRef = this.dialog.open(FrmCheckComponent,{ disableClose: true,
       data: '¿Desea eliminar la imagen?',
       height: '310px',
       width: '320px'
@@ -94,7 +95,7 @@ export class ImagesListComponent implements OnInit {
             this.http.delete('http://localhost:8080/api/images/delete/'+id)
             .subscribe(data =>{
               console.log(data)
-              //window.location.reload();
+              window.location.reload();
             },
             error =>{
               console.log(error);
@@ -109,5 +110,5 @@ export class ImagesListComponent implements OnInit {
         })
         
 
-   }
+  }
 }
