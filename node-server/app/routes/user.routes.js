@@ -31,5 +31,7 @@ module.exports = function (app) {
     //configura la ruta para visualizar los datos de todos los users
     app.get("/api/user/all",ctrlrUser.user);
 
+    app.delete("/api/user/delete/:id", ctrlrUser.deleteUsers);
+
 };
 
