@@ -3,6 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { ServiceService } from 'src/app/services/service.service';
 import { UsersService } from 'src/app/services/users.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
+import { MatDialog } from '@angular/material/dialog';
+import { FrmCheckComponent } from '../../Msg/frm-check/frm-check.component';
+import { FrmOkComponent } from '../../Msg/frm-ok/frm-ok.component';
+import { HttpClient } from '@angular/common/http';
 /*Termina las importaciones*/
 
 @Component({
@@ -12,14 +16,16 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 })
 export class FrmUserComponent implements OnInit {
   
-  showUsers:any;
+  public showUsers = [];
   showRol:any;
   content: string;
   rol: any;
 
   constructor(private Service:ServiceService,
               private userServive:UsersService,
-              private token:TokenStorageService) { }
+              private token:TokenStorageService,
+              private dialog: MatDialog,
+              private http: HttpClient) { }
 
   ngOnInit(): void {
     //Llama el token
@@ -49,6 +55,33 @@ export class FrmUserComponent implements OnInit {
       error =>{
         console.log(error)
       });
+  }
+
+  /*Metodo para eliminar usuarios*/
+  getUserDelete(id){
+    const dialogRef = this.dialog.open(FrmCheckComponent,{
+      data: '¿Desea eliminar el usuario?',
+      height: '310px',
+      width: '320px'
+    })
+      .afterClosed()
+        .subscribe((confirmar: Boolean)=> {
+          if (confirmar) {
+            this.http.delete('http://localhost:8080/api/user/delete/'+id)
+              .subscribe(data =>{
+                console.log(data)
+                window.location.reload()
+              },
+              error =>{
+                console.log(error);
+              });
+              this.dialog.open(FrmOkComponent, {
+                data: 'Se eliminó exitosamente',
+                height: '310px',
+                width: '320px',
+              })
+          }
+        })
   }
 
 }
