@@ -59,7 +59,7 @@ export class FrmUserComponent implements OnInit {
 
   /*Metodo para eliminar usuarios*/
   getUserDelete(id){
-    const dialogRef = this.dialog.open(FrmCheckComponent,{
+    const dialogRef = this.dialog.open(FrmCheckComponent,{ disableClose: true,
       data: '¿Desea eliminar el usuario?',
       height: '310px',
       width: '320px'
@@ -75,7 +75,7 @@ export class FrmUserComponent implements OnInit {
               error =>{
                 console.log(error);
               });
-              this.dialog.open(FrmOkComponent, {
+              this.dialog.open(FrmOkComponent, { disableClose: true,
                 data: 'Se eliminó exitosamente',
                 height: '310px',
                 width: '320px',
