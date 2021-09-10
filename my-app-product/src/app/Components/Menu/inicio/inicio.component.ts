@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { ServiceService } from '../../../services/service.service';
 
 @Component({
   selector: 'app-inicio',
@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class InicioComponent implements OnInit {
   public data = [];
 
-  constructor(private http: HttpClient ) { }
+  constructor(private ImgAll: ServiceService ) { }
 
   ngOnInit(): void {
     this.getImages();
@@ -17,7 +17,7 @@ export class InicioComponent implements OnInit {
   
   getImages(){
     this.data = [];
-    this.http.get('http://localhost:8080/api/images/all')
+    this.ImgAll.getAllImages()
       .subscribe(res =>{
         console.log(res);
         for (const dd of res['data']){
