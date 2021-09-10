@@ -4,11 +4,14 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 8081",
+    "start:dev": "ng serve --port 8081 --c=dev",
+    "start:test": "ng serve --port 8081 --c=test",
+    "start:prod": "ng serve --port 8081 --c=production",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "dev": "concurrently \"npm run server\" \"cd ../my-app-product && npm run start\"",
+    "dev:": "concurrently \"npm run server\" \"cd ../my-app-product && npm run start\"",
     "server": "cd ../node-server && npm run test"
   },
   "private": true,
@@ -34,7 +37,6 @@
     "html2canvas": "^1.0.0",
     "jquery": "^3.6.0",
     "jspdf": "^2.3.1",
-    "ng2-pdf-viewer": "^7.0.1",
     "ngx-infinite-scroll": "^10.0.0",
     "ngx-spinner": "^10.0.1",
     "pdfmake": "^0.2.0",
