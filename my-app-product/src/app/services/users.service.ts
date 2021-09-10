@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 /*Se hacen las importaciones*/
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment  } from '../../environments/environment';
 /*Termina las importaciones*/
 
 //se define la ruta del api
-const C_url = 'http://localhost:8080/api/test/';
-const C_url2 = 'http://localhost:8080/api/prod/';
+const C_url = environment.baseUrlTest;
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +33,6 @@ export class UsersService {
   //metodo para acceder al rol admin
   getAdmin(): Observable<any>{
     return this.http.get(C_url + 'admin', { responseType: 'text' });
-    //return this.http.get(C_url2 + 'producto', { responseType: 'text' });
   }
 
 }

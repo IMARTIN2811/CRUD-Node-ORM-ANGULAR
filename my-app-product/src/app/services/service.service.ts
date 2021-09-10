@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 //se importan las librerias
 import { HttpClient,HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment' ;
 /*Terminan las importaciones*/
 
-const C_baseUrl = 'http://localhost:8080/api/products';
-const C_baseUrl2 = 'http://localhost:8080/api/auth/';
-const C_baseUrl3 = 'http://localhost:8080/api/user/';
+const C_baseUrl = environment.baseUrl;
+const C_baseUrl2 = environment.baseUrlAuth;
+const C_baseUrl3 = environment.baseUrlUser;
+const C_baseUrlImg = environment.baseUrlImg;
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })  
@@ -16,8 +18,8 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ServiceService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   /*se configuran las rutas para el api de products*/
   //accede a la ruta de mostrar datos
@@ -52,7 +54,7 @@ export class ServiceService {
   /*Inicia la configuracion para la ruta api de auth*/
   //Hace la peticion para el login 
   getLogin(credentls): Observable<any>{
-    return this.http.post(C_baseUrl2 + 'login', {
+    return this.http.post(C_baseUrl2 + '/api/auth/login', {
       username: credentls.username,
       password: credentls.password
     }, httpOptions);
@@ -60,7 +62,7 @@ export class ServiceService {
 
   //Hace la peticion para el registro de usuarios
   getRegister(user): Observable<any>{
-    return this.http.post(C_baseUrl2 + 'register', {
+    return this.http.post(C_baseUrl2 + '/api/auth/register', {
       username: user.username,
       email: user.email,
       password: user.password 
@@ -70,9 +72,14 @@ export class ServiceService {
     return this.http.post<Boolean>(C_baseUrl2 + 'logout', {});
   }
   /*Termina la configuracion para el api*/
-
+  
+  /*Hace la peticion para visualizar todos los users */
   getAllUsers():Observable<any>{
     return this.http.get(C_baseUrl3 + 'all');
   }
 
+  /*Hace la peticion para visualizar todas la img */
+  getAllImages():Observable<any>{
+    return this.http.get(C_baseUrlImg);
+  }
 }
