@@ -8,6 +8,7 @@ import { ImagesEditComponent } from '../images-edit/images-edit.component';
 import { FrmCheckComponent } from 'src/app/Components/Msg/frm-check/frm-check.component';
 import { FrmOkComponent } from 'src/app/Components/Msg/frm-ok/frm-ok.component';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ServiceService } from '../../services/service.service';
 /*Termina importaciones */
 
 @Component({
@@ -27,6 +28,7 @@ export class ImagesListComponent implements OnInit {
 
   constructor(private token: TokenStorageService,
               private userService: UsersService,
+              private imgAll: ServiceService,
               private http: HttpClient,
               private dialog:MatDialog,
               private spinner: NgxSpinnerService) { }
@@ -53,7 +55,7 @@ export class ImagesListComponent implements OnInit {
   /*Crea el metodo y hace la peticion get */
   showImages(){
     this.data = [];
-    this.http.get('http://localhost:8080/api/images/all')
+    this.imgAll.getAllImages()
       .subscribe(res=>{
         console.log(res);
         for (const dd of res['data']){
