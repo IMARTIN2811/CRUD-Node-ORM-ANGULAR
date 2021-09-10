@@ -5,5 +5,5 @@ export const environment = {
   baseUrlUser: 'http://localhost:8080/api/user/',
   baseUrlTest: 'http://localhost:8080/api/test/',
   baseUrlImg: 'http://localhost:8080/api/images/all',
-  env: 'Production'
+  env: 'Testing'
 };
